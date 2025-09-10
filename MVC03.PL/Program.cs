@@ -1,3 +1,6 @@
+using Demo.BL.Services;
+using Microsoft.EntityFrameworkCore;
+
 namespace MVC03.PL
 {
     public class Program
@@ -8,6 +11,17 @@ namespace MVC03.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
+            builder.Services.AddScoped<DepartmentsService>();
+            builder.Services.AddScoped<DepartmentsRepository>();
+            //builder.Services.AddScoped<CompanyDbContext>(Provider=>
+            //(
+            //);
+
+            //builder.Services.AddDbContext<CompanyDbContext>(options=>
+            //{
+            //    options.UseSqlServer("");
+            //}
+            //);
 
             var app = builder.Build();
 
@@ -22,15 +36,23 @@ namespace MVC03.PL
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            app.UseRouting();
+            //app.UseRouting();
 
-            app.UseAuthorization();
+            //app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
+        }
+
+        private class DepartmentsRepository
+        {
+        }
+
+        private class CompanyDbContext
+        {
         }
     }
 }
