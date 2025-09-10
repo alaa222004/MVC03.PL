@@ -15,6 +15,9 @@ namespace MVC03.PL.Controllers
 
         public IActionResult Index()
         {
+            //data acc model{domain model,data acss logic ...}
+            //bl {}
+            //ui
             return View();
         }
 
