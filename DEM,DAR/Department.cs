@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DEM_DAR
 {
-    internal class Department:BaseEntity
+    public class Department:BaseEntity
     {
         public string Name { get; set; }
         public string? Description { get; set; }
