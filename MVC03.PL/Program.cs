@@ -1,3 +1,5 @@
+using DEM_DAR.Context;
+using DEM_DAR.Repositories;
 using Demo.BL.Services;
 using Microsoft.EntityFrameworkCore;
 
@@ -11,17 +13,17 @@ namespace MVC03.PL
 
             // Add services to the container.
             builder.Services.AddControllersWithViews();
-            builder.Services.AddScoped<DepartmentsService>();
-            builder.Services.AddScoped<DepartmentsRepository>();
-            //builder.Services.AddScoped<CompanyDbContext>(Provider=>
-            //(
-            //);
 
-            //builder.Services.AddDbContext<CompanyDbContext>(options=>
-            //{
-            //    options.UseSqlServer("");
-            //}
-            //);
+            // Repository DI
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+            builder.Services.AddScoped<IDepartmentService, DepartmentsService>();
+            // DbContext
+            builder.Services.AddDbContext<CompanyDbContext>(options =>
+            {
+                var connection = builder.Configuration.GetConnectionString("DefualtConnection");
+                options.UseSqlServer(connection);
+            });
+            //builder.Services.AddAutoMapper(typeof(BL.AssemblyReference).Assembly;
 
             var app = builder.Build();
 
@@ -29,30 +31,21 @@ namespace MVC03.PL
             if (!app.Environment.IsDevelopment())
             {
                 app.UseExceptionHandler("/Home/Error");
-                // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
-            //app.UseRouting();
+            app.UseRouting();
 
-            //app.UseAuthorization();
+            app.UseAuthorization();
 
             app.MapControllerRoute(
                 name: "default",
                 pattern: "{controller=Home}/{action=Index}/{id?}");
 
             app.Run();
-        }
-
-        private class DepartmentsRepository
-        {
-        }
-
-        private class CompanyDbContext
-        {
         }
     }
 }
