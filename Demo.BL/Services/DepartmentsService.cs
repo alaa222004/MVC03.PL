@@ -1,42 +1,56 @@
-﻿using DEM_DAR;
-using DEM_DAR.Models;
-using DEM_DAR.Repositories;
+﻿using DEM_DAR.Repositories;
+using Demo.BL.DataTransferObjects.Department;
+using Demo.BL.DataTransferObjects;
+using Demo.DAL.Entities;
+//using Demo.DAL.Repositories;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using Demo.BLL.DataTransferObjects;
 
-namespace Demo.BL.Services
+public class DepartmentService(IDepartmentRepository departmentRepository) : IDepartmentService
 {
-    public class DepartmentsService : IDepartmentService
+    public int Add(DepartmentRequest request)
     {
-        private readonly IRepository<Department> _repository;
+        //Mapping 
+        //Manual
+        //var department = new Department{ 
+        //Code = request.Code,
+        //CreatedAt = request.CreatedAt,
+        //Description = request.Description,
+        //};
+        //var department = DepartmentFactory.ToEntity(request);
+        var department = request.ToEntity();
+        // AutoMapper
+        // Mapster
 
-        public DepartmentsService(IRepository<Department> repository)
-        {
-            _repository = repository;
-        }
+        return departmentRepository.Add(department);
+    }
 
-        public int Create(Department request)
-        {
-            return _repository.Add(request);
-        }
+    public bool Delete(int id)
+    {
 
-        public int Update(Department department)
-        {
-            return _repository.Update(department);
-        }
+        var department = departmentRepository.GetById(id);
+        if (department is null)
+            return false;
+        var result = departmentRepository.Delete(department);
+        return result > 0;
+    }
 
-        public int Delete(Department department)
-        {
-            return _repository.Delete(department);
-        }
+    public IEnumerable<DepartmentResponse> GetAll()
+    {
+        return departmentRepository.GetAll().Select(x => x.ToResponse());
+    }
 
-        public IEnumerable<Department> GetAll(bool trackChanges = false)
-        {
-            return _repository.GetAll(trackChanges);
-        }
+    public DepartmentDetailsResponse? GetById(int id)
+    {
+        return departmentRepository.GetById(id)?.ToDetailsResponse();
+    }
 
-        public Department? GetById(int id)
-        {
-            return _repository.GetById(id);
-        }
+    public int Update(DepartmentUpdateRequest request)
+    {
+        return departmentRepository.Update(request.ToEntity());
     }
 }

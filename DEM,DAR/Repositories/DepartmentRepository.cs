@@ -1,5 +1,6 @@
 ﻿using DEM_DAR.Context;
 using DEM_DAR.Models;
+using Demo.DAL.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DEM_DAR.Repositories
 {
-    public class DepartmentRepository:IRepository<Department>
+    public class DepartmentRepository: IDepartmentRepository
     {
         private readonly CompanyDbContext _context;
         private readonly DbSet<Department> _departments;

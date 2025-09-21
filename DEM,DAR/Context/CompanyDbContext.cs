@@ -1,5 +1,6 @@
 ﻿global using Microsoft.EntityFrameworkCore;
 using DEM_DAR.Models;
+using Demo.DAL.Entities;
 using Microsoft.EntityFrameworkCore.Metadata;
 using System;
 using System.Collections.Generic;
@@ -25,7 +26,7 @@ namespace DEM_DAR.Context
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(CompanyDbContext).Assembly);
         }
     }
 

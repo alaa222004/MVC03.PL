@@ -11,6 +11,8 @@ namespace Demo.BL.DataTransferObjects.Employee
     {
         public int Id { get; set; }
 
+        public int Age { get; set; }
+
         [Display(Name = "Name")]
         public string Name { get; set; } = null!;
 
