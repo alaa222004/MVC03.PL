@@ -3,6 +3,8 @@ using DEM_DAR.Repositories;
 using Demo.BL.Services;
 using Microsoft.EntityFrameworkCore;
 
+
+
 namespace MVC03.PL
 {
     public class Program
@@ -14,16 +16,18 @@ namespace MVC03.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            // Service DI
+            builder.Services.AddScoped<IDepartmentService, DepartmentService>();
+
             // Repository DI
-            builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
-            builder.Services.AddScoped<IDepartmentService, DepartmentsService>();
+            builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
             // DbContext
             builder.Services.AddDbContext<CompanyDbContext>(options =>
             {
-                var connection = builder.Configuration.GetConnectionString("DefualtConnection");
+                var connection = builder.Configuration.GetConnectionString("DefaultConnection");
                 options.UseSqlServer(connection);
             });
-            //builder.Services.AddAutoMapper(typeof(BL.AssemblyReference).Assembly;
 
             var app = builder.Build();
 

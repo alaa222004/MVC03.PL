@@ -1,15 +1,17 @@
-﻿using DEM_DAR;
-using DEM_DAR.Models;
+﻿using Demo.BL.DataTransferObjects.Department;
+using Demo.BLL.DataTransferObjects;
+using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace Demo.BL.Services
+
+public interface IDepartmentService
 {
-    public interface IDepartmentService
-    {
-        int Create(Department request);
-        int Update(Department department);
-        int Delete(Department department);
-        IEnumerable<Department> GetAll(bool trackChanges = false);
-        Department? GetById(int id);
-    }
+    DepartmentDetailsResponse? GetById(int id);
+    IEnumerable<DepartmentResponse> GetAll();
+    int Update(DepartmentUpdateRequest request);
+    bool Delete(int id);
+    int Add(DepartmentRequest request);
 }
