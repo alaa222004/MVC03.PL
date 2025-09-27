@@ -1,4 +1,5 @@
 ﻿using Demo.BL.DataTransferObjects.Department;
+using Demo.BL.DataTransferObjects.Employee;
 using Demo.BLL.DataTransferObjects;
 using System;
 using System.Collections.Generic;

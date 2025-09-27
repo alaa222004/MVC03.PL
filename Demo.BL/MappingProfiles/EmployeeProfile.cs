@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Demo.BL.MappingProfiles
 {
-    internal class EmployeeProfile:Profile
+    public class EmployeeProfile:Profile
     {
         public EmployeeProfile()
         {
@@ -17,8 +17,11 @@ namespace Demo.BL.MappingProfiles
              CreateMap<EmployeeUpdateRequest, Employee>();
 
              CreateMap< Employee,EmployeeDetailResponse>();
+            CreateMap<EmployeeDetailResponse, EmployeeUpdateRequest>();
 
                 CreateMap<Employee, EmployeeResponse>();
-    }
+
+            CreateMap<EmployeeUpdateRequest, EmployeeRequest>();
+        }
 }
 }

@@ -1,5 +1,4 @@
 ﻿using DEM_DAR.Models;
-using Demo.DAL.Entities;
 using System.Collections.Generic;
 
 namespace DEM_DAR.Repositories

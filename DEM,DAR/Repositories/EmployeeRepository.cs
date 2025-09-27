@@ -1,16 +1,19 @@
 ﻿using DEM_DAR.Context;
 using DEM_DAR.Models;
-using Microsoft.EntityFrameworkCore; 
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
 
 namespace DEM_DAR.Repositories
 {
-    public class EmployeeRepository: IRepository<Employee> 
+    public class EmployeeRepository : IRepository<Employee>
     {
         private readonly CompanyDbContext _context;
         private readonly DbSet<Employee> _employees;
+
 
         public EmployeeRepository(CompanyDbContext context)
         {
