@@ -22,50 +22,6 @@ namespace DEM_DAR.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("DEM_DAR.Department", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("CreatedOn")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Createdby")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Description")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<bool>("IsDeleted")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("Kind")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastModifae")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("code")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("last")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Departments");
-                });
-
             modelBuilder.Entity("DEM_DAR.Models.Employee", b =>
                 {
                     b.Property<int>("Id")
@@ -76,7 +32,8 @@ namespace DEM_DAR.Migrations
 
                     b.Property<string>("Adress")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(30)
+                        .HasColumnType("varChar");
 
                     b.Property<int?>("Age")
                         .HasColumnType("int");
@@ -89,10 +46,11 @@ namespace DEM_DAR.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("Email")
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("varChar");
 
-                    b.Property<int?>("Gender")
-                        .HasColumnType("int");
+                    b.Property<string>("Gender")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<bool>("IsDeleted")
                         .HasColumnType("bit");
@@ -102,16 +60,20 @@ namespace DEM_DAR.Migrations
 
                     b.Property<string>("Name")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(20)
+                        .HasColumnType("varChar");
 
                     b.Property<string>("Phone")
+                        .HasMaxLength(20)
+                        .HasColumnType("varChar");
+
+                    b.Property<string>("Salary")
+                        .IsRequired()
+                        .HasMaxLength(20)
+                        .HasColumnType("varChar");
+
+                    b.Property<string>("employeeType")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Salary")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("employeeType")
-                        .HasColumnType("int");
 
                     b.Property<string>("last")
                         .IsRequired()
@@ -120,6 +82,71 @@ namespace DEM_DAR.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Employees");
+                });
+
+            modelBuilder.Entity("Demo.DAL.Entities.Department", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Code")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("CreatedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("CreatedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("Createdby")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<bool>("IsDeleted")
+                        .HasColumnType("bit");
+
+                    b.Property<DateTime>("Kind")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("datetime2")
+                        .HasDefaultValueSql("GetDate");
+
+                    b.Property<DateTime>("LastModifae")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("LastModifiedBy")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("LastModifiedOn")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("code")
+                        .IsRequired()
+                        .HasMaxLength(50)
+                        .HasColumnType("varchar");
+
+                    b.Property<string>("last")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Departments");
                 });
 #pragma warning restore 612, 618
         }

@@ -1,5 +1,4 @@
 ﻿using AutoMapper;
-using DEM_DAR;
 using DEM_DAR.Models;
 using DEM_DAR.Repositories;
 using Demo.BL.DataTransferObjects.Employee;
@@ -7,38 +6,56 @@ using System.Collections.Generic;
 
 namespace Demo.BL.Services
 {
-    public class EmployeeService(IRepository<Employee> repository, IMapper mapper) 
-        : IEmployeeService
+    public class EmployeeService : IEmployeeService
     {
         private readonly IRepository<Employee> _repository;
+        private readonly IMapper _mapper;
 
-
+        public EmployeeService(IRepository<Employee> repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
 
         public int Add(EmployeeRequest request)
         {
-            var employee = mapper.Map<Employee>(request);
+            var employee = _mapper.Map<Employee>(request);
             return _repository.Add(employee);
         }
 
-
-        public int Update(Employee employee)
+        public int Update(EmployeeUpdateRequest request)
         {
+            var employee = _mapper.Map<Employee>(request);
             return _repository.Update(employee);
         }
 
-        public int Delete(Employee employee)
+        public IEnumerable<EmployeeDetailResponse> GetAll(string? searchValue = null)
         {
-            return _repository.Delete(employee);
+            var employees = _repository.GetAll();
+
+            if (!string.IsNullOrWhiteSpace(searchValue))
+            {
+                employees = employees.Where(e =>
+                    e.Name.Contains(searchValue, StringComparison.OrdinalIgnoreCase));
+            }
+
+            return _mapper.Map<IEnumerable<EmployeeDetailResponse>>(employees);
         }
 
-        public IEnumerable<Employee> GetAll(bool trackChanges = false)
+        public EmployeeDetailResponse? GetById(int id)
         {
-            return _repository.GetAll(trackChanges);
+            var employee = _repository.GetById(id);
+            return employee == null ? null : _mapper.Map<EmployeeDetailResponse>(employee);
         }
 
-        public Employee? GetById(int id)
+        public bool Delete(int id)
         {
-            return _repository.GetById(id);
+            var employee = _repository.GetById(id);
+            if (employee == null)
+                return false;
+
+            var result = _repository.Delete(employee);
+            return result > 0;
         }
     }
 }

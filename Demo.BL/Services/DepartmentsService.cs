@@ -1,14 +1,15 @@
 ﻿using DEM_DAR.Repositories;
-using Demo.BL.DataTransferObjects.Department;
 using Demo.BL.DataTransferObjects;
-using Demo.DAL.Entities;
+using Demo.BL.DataTransferObjects.Department;
+using Demo.BL.DataTransferObjects.Employee;
+using Demo.BLL.DataTransferObjects;
+//using Demo.DAL.Entities;
 //using Demo.DAL.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using Demo.BLL.DataTransferObjects;
 
 public class DepartmentService(IDepartmentRepository departmentRepository) : IDepartmentService
 {

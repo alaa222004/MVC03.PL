@@ -1,6 +1,7 @@
 ﻿using DEM_DAR;
+using DEM_DAR.Models;
 using Demo.BL.DataTransferObjects.Department;
-using Demo.DAL.Entities;
+using Demo.BL.DataTransferObjects.Employee;
 
 namespace Demo.BLL.DataTransferObjects;
 internal static class DepartmentFactory
@@ -18,7 +19,7 @@ internal static class DepartmentFactory
         Id = department.Id,
         Name = department.Name,
         Description = department.Description,
-        CreatedBy = department.CreatedBy,
+        CreatedBy = department.LastModifiedBy,
         CreatedOn = department.CreatedOn,
         IsDeleted = department.IsDeleted,
         Code = department.Code,

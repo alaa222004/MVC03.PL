@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DEM_DAR.Migrations
 {
     /// <inheritdoc />
-    public partial class AddedEmployeesTable : Migration
+    public partial class UpdateDepartments : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -17,12 +17,17 @@ namespace DEM_DAR.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    code = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Kind = table.Column<int>(type: "int", nullable: false),
+                    Name = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    Code = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Description = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
+                    CreatedAt = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    CreatedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastModifiedOn = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Kind = table.Column<DateTime>(type: "datetime2", nullable: false, defaultValueSql: "GetDate"),
+                    LastModifiedBy = table.Column<int>(type: "int", nullable: false),
+                    CreatedBy = table.Column<int>(type: "int", nullable: false),
+                    code = table.Column<string>(type: "varchar(50)", maxLength: 50, nullable: false),
                     Createdby = table.Column<int>(type: "int", nullable: false),
-                    CreatedOn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     last = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     IsDeleted = table.Column<bool>(type: "bit", nullable: false),
                     LastModifae = table.Column<DateTime>(type: "datetime2", nullable: false)
@@ -38,14 +43,14 @@ namespace DEM_DAR.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    Name = table.Column<string>(type: "varChar(20)", maxLength: 20, nullable: false),
                     Age = table.Column<int>(type: "int", nullable: true),
-                    Salary = table.Column<int>(type: "int", nullable: false),
-                    Adress = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Phone = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Gender = table.Column<int>(type: "int", nullable: true),
-                    employeeType = table.Column<int>(type: "int", nullable: true),
+                    Salary = table.Column<string>(type: "varChar(20)", maxLength: 20, nullable: false),
+                    Adress = table.Column<string>(type: "varChar(30)", maxLength: 30, nullable: false),
+                    Email = table.Column<string>(type: "varChar(20)", maxLength: 20, nullable: true),
+                    Phone = table.Column<string>(type: "varChar(20)", maxLength: 20, nullable: true),
+                    Gender = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    employeeType = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     Createdby = table.Column<int>(type: "int", nullable: false),
                     CreatedOn = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     last = table.Column<string>(type: "nvarchar(max)", nullable: false),

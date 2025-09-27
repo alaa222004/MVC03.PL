@@ -3,8 +3,6 @@ using DEM_DAR.Repositories;
 using Demo.BL.Services;
 using Microsoft.EntityFrameworkCore;
 
-
-
 namespace MVC03.PL
 {
     public class Program
@@ -16,20 +14,22 @@ namespace MVC03.PL
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
-            // Service DI
+            // Department Services & Repositories
             builder.Services.AddScoped<IDepartmentService, DepartmentService>();
-
-            // Repository DI
             builder.Services.AddScoped<IDepartmentRepository, DepartmentRepository>();
+
+            // Register Generic Repository
+            builder.Services.AddScoped(typeof(IRepository<>), typeof(BaseRepository<>));
+
+            // Employee Service
+            builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddAutoMapper(typeof(Program));
 
             // DbContext
             builder.Services.AddDbContext<CompanyDbContext>(options =>
-            {
-                var connection = builder.Configuration.GetConnectionString("DefaultConnection");
-                options.UseSqlServer(connection);
-            });
+                options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-            var app = builder.Build();
+             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
             if (!app.Environment.IsDevelopment())
