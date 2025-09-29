@@ -17,17 +17,17 @@ namespace DEM_DAR.Repositories
             _entities = context.Set<TEntity>();
         }
 
-        public int Add(TEntity entity)
+        public void Add(TEntity entity)
         {
             _entities.Add(entity);
-            return _context.SaveChanges();
+          
         }
 
-        public int Delete(TEntity entity)
+        public void Delete(TEntity entity)
         {
             entity.IsDeleted = true;
             _entities.Update(entity);
-            return _context.SaveChanges();
+         
         }
 
         public IEnumerable<TEntity> GetAll(bool trackChanges = false)
@@ -41,10 +41,10 @@ namespace DEM_DAR.Repositories
             return _entities.Find(id);
         }
 
-        public int Update(TEntity entity)
+        public void Update(TEntity entity)
         {
             _entities.Update(entity);
-            return _context.SaveChanges();
+        
         }
     }
 }

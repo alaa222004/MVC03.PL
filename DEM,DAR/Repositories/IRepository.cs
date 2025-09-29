@@ -11,8 +11,8 @@ namespace DEM_DAR.Repositories
     {
         IEnumerable<IEntity> GetAll(bool trackChanges = false);
         IEntity? GetById(int id);
-        int Add(IEntity entity);
-        int Update(IEntity entity);
-        int Delete(IEntity entity);
+        void Add(IEntity entity);
+        void Update(IEntity entity);
+        void Delete(IEntity entity);
     }
 }

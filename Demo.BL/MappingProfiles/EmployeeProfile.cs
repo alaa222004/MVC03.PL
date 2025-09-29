@@ -16,10 +16,10 @@ namespace Demo.BL.MappingProfiles
         CreateMap<EmployeeRequest,Employee>();
              CreateMap<EmployeeUpdateRequest, Employee>();
 
-             CreateMap< Employee,EmployeeDetailResponse>();
+             CreateMap< Employee,EmployeeDetailResponse>().ForMember(d=>d.Department,o=>o.MapFrom(s=>s.Department.Name));
             CreateMap<EmployeeDetailResponse, EmployeeUpdateRequest>();
 
-                CreateMap<Employee, EmployeeResponse>();
+                CreateMap<Employee, EmployeeResponse>().ForMember(d => d.Department, o => o.MapFrom(s => s.Department.Name));
 
             CreateMap<EmployeeUpdateRequest, EmployeeRequest>();
         }

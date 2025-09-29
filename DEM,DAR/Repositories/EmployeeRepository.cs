@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace DEM_DAR.Repositories
 {
-    public class EmployeeRepository : IRepository<Employee>
+    public class EmployeeRepository : IEmployeeRepository
     {
         private readonly CompanyDbContext _context;
         private readonly DbSet<Employee> _employees;
