@@ -2,16 +2,17 @@
 using DEM_DAR.Models;
 using DEM_DAR.Repositories;
 using Demo.BL.DataTransferObjects.Employee;
+using System.Buffers;
 using System.Collections.Generic;
 
 namespace Demo.BL.Services
 {
     public class EmployeeService : IEmployeeService
     {
-        private readonly IRepository<Employee> _repository;
+        private readonly IEmployeeRepository _repository;
         private readonly IMapper _mapper;
 
-        public EmployeeService(IRepository<Employee> repository, IMapper mapper)
+        public EmployeeService(IEmployeeRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
@@ -56,6 +57,12 @@ namespace Demo.BL.Services
 
             var result = _repository.Delete(employee);
             return result > 0;
+        }
+
+        public IEnumerable<EmployeeDetailResponse> GetAll() {
+
+            var employees = _repository.GetAll();
+            return _mapper.Map<IEnumerable<EmployeeDetailResponse>>(employees);
         }
     }
 }

@@ -19,6 +19,8 @@ namespace DEM_DAR.Models
 
         public Gender? Gender { get; set; }
         public EmployeeType?employeeType { get; set; }
+        public Department Department { get; set; }
+
 
     }
 }

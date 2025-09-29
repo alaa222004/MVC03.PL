@@ -31,5 +31,12 @@ namespace Demo.BL.DataTransferObjects.Employee
 
         [Display(Name = "Employee Type")]
         public string EmployeeType { get; set; } = null!;
+
+        public DateTime CreatedOn { get; set; }
+        public int CreatedBy { get; set; }
+        public DateTime LastModifiedOn { get; set; }
+
+        public string? Department { get; set; }
+        public int? DepartmentId { get; set; }
     }
 }

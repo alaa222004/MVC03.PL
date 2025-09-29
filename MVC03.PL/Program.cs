@@ -1,6 +1,7 @@
 using DEM_DAR.Context;
 using DEM_DAR.Repositories;
 using Demo.BL.Services;
+using Demo.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
 
 namespace MVC03.PL
@@ -23,6 +24,8 @@ namespace MVC03.PL
 
             // Employee Service
             builder.Services.AddScoped<IEmployeeService, EmployeeService>();
+            builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
+            builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(Program));
 
             // DbContext
