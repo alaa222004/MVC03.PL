@@ -4,6 +4,7 @@ using Demo.BL.DataTransferObjects.Employee;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -16,12 +17,17 @@ namespace Demo.BL.MappingProfiles
         CreateMap<EmployeeRequest,Employee>();
              CreateMap<EmployeeUpdateRequest, Employee>();
 
-             CreateMap< Employee,EmployeeDetailResponse>().ForMember(d=>d.Department,o=>o.MapFrom(s=>s.Department.Name));
+             CreateMap< Employee,EmployeeDetailResponse>()
+                .ForMember(d=>d.Department,o=>o.MapFrom(s=>s.Department.Name));
             CreateMap<EmployeeDetailResponse, EmployeeUpdateRequest>();
 
                 CreateMap<Employee, EmployeeResponse>().ForMember(d => d.Department, o => o.MapFrom(s => s.Department.Name));
 
             CreateMap<EmployeeUpdateRequest, EmployeeRequest>();
+
+
+            
         }
 }
 }
+

@@ -1,5 +1,6 @@
 using DEM_DAR.Context;
 using DEM_DAR.Repositories;
+using Demo.BL.MappingProfiles;
 using Demo.BL.Services;
 using Demo.DAL.Repositories;
 using Microsoft.EntityFrameworkCore;
@@ -27,6 +28,7 @@ namespace MVC03.PL
             builder.Services.AddScoped<IEmployeeRepository, EmployeeRepository>();
             builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
             builder.Services.AddAutoMapper(typeof(Program));
+            builder.Services.AddAutoMapper(typeof(EmployeeProfile));
 
             // DbContext
             builder.Services.AddDbContext<CompanyDbContext>(options =>

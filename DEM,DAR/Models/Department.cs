@@ -8,17 +8,22 @@ namespace DEM_DAR.Models
 {
     public class Department : BaseEntity
     {
+        public int Id { get; set; }
+
         public string Name { get; set; } = null!;
-        public string Code { get; set; } = null!;
+
         public string? Description { get; set; }
-        public DateTime CreatedAt { get; set; }
-        public DateTime CreatedOn { get; set; }
-        public DateTime LastModifiedOn { get; set; }
-        public DateTime Kind { get; set; }
-        public int LastModifiedBy {  get; set; }
-        public int code { get; set; }
 
+        public string Code { get; set; } = null!;
 
+        public int Kind { get; set; }
 
+        public int Createdby { get; set; }
+        public string CreatedOn { get; set; }
+
+        public string last { get; set; } 
+        public bool IsDeleted { get; set; } = false;
+
+        public DateTime LastModifae { get; set; }
     }
 }

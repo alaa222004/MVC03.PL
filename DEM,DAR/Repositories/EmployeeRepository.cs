@@ -1,10 +1,5 @@
 ﻿using DEM_DAR.Context;
 using DEM_DAR.Models;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace DEM_DAR.Repositories
@@ -13,7 +8,6 @@ namespace DEM_DAR.Repositories
     {
         private readonly CompanyDbContext _context;
         private readonly DbSet<Employee> _employees;
-
 
         public EmployeeRepository(CompanyDbContext context)
         {
@@ -34,21 +28,37 @@ namespace DEM_DAR.Repositories
             return _context.SaveChanges();
         }
 
+        // ✅ Delete by Id
+        public int Delete(int id)
+        {
+            var employee = _employees.Find(id);
+            if (employee == null) return 0;
+
+            employee.IsDeleted = true;
+            _employees.Update(employee);
+            return _context.SaveChanges();
+        }
+
         public IEnumerable<Employee> GetAll(bool trackChanges = false)
-            =>
-            trackChanges
+            => trackChanges
                 ? _employees.Where(x => !x.IsDeleted).ToList()
                 : _employees.AsNoTracking().Where(x => !x.IsDeleted).ToList();
 
+ 
         public Employee? GetById(int id)
         {
-            return _employees.Find(id);
+            return _employees.FirstOrDefault(e => e.Id == id && !e.IsDeleted);
         }
 
         public int Update(Employee employee)
         {
             _employees.Update(employee);
             return _context.SaveChanges();
+        }
+
+        Employee? IEmployeeRepository.GetById(int id)
+        {
+            return GetById(id);
         }
     }
 }

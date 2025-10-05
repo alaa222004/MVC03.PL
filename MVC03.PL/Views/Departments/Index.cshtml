@@ -1,7 +1,9 @@
 ﻿@using Demo.BL.DataTransferObjects
 @using Demo.BL.DataTransferObjects.Department
 @using Demo.BL.DataTransferObjects.Employee
-@model IEnumerable<DepartmentDetailsResponse>
+@model IEnumerable<DepartmentResponse>
+
+
 @{
     ViewData["Title"] = "Index";
 
@@ -10,7 +12,7 @@
 <h1>All Departments</h1>
 <br />
 <br />
-<a class="btn btn-primary" asp-controller="Department" asp-action="Create">Create Department</a>
+<a class="btn btn-primary" asp-controller="Departments" asp-action="Create">Create Department</a>
 <br />
 @if (Model.Count() > 0)
 {
@@ -19,7 +21,7 @@
             <tr>
                 <th>@Html.DisplayNameFor(d => d.Code)</th>
                 <th>@Html.DisplayNameFor(d => d.Name)</th>
-                <th>@Html.DisplayNameFor(d => d.CreatedOn)</th>
+                <th>@Html.DisplayNameFor(d => d.CreatedAt)</th>
                 <th>Details </th>
                 <th>Update</th>
                 <th>Delete</th>
@@ -31,23 +33,24 @@
                 <tr>
                     <td>@Html.DisplayFor(d => department.Code)</td>
                     <td>@Html.DisplayFor(d => department.Name)</td>
-                    <td>@Html.DisplayFor(d => department.CreatedOn)</td>
+                    <td>@Html.DisplayFor(d => department.CreatedAt)</td>
 
                     <td>
-                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@Model">
+                        <a class="btn btn-primary" asp-action="Details" asp-route-id="@department.Id">
                             <i class="fas fa-eye"></i> Details
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@Model">
+                        <a class="btn btn-success" asp-action="Edit" asp-route-id="@department.Id">
                             <i class="fas fa-edit"></i> Edit
                         </a>
                     </td>
                     <td>
-                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@Model">
+                        <a class="btn btn-danger" asp-action="Delete" asp-route-id="@department.Id">
                             <i class="fas fa-trash"></i> Delete
                         </a>
                     </td>
+
                 </tr>
             }
         </tbody>
