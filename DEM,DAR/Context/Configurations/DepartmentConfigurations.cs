@@ -12,13 +12,14 @@ namespace DEM_DAR.Context.Configirations
     {
         public void Configure(EntityTypeBuilder<Department> builder)
         {
+;
             builder.Property(d => d.Name).IsRequired()
                 .HasMaxLength(50).HasColumnType("varchar");
             builder.Property(d => d.Description).IsRequired()
                 .HasMaxLength(50).HasColumnType("varchar");
-            builder.Property(d => d.code).IsRequired()
+            builder.Property(d => d.Code).IsRequired()
                 .HasMaxLength(50).HasColumnType("varchar");
-            builder.Property(d => d.Kind).HasDefaultValueSql("GetDate");
+            //builder.Property(d => d.Kind).HasDefaultValueSql("GetDate");
              
 
         }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Demo.BL.DataTransferObjects.Department;
+using System;
 
 namespace Demo.BL.DataTransferObjects.Employee
 {
@@ -30,10 +31,20 @@ namespace Demo.BL.DataTransferObjects.Employee
         public string? Description { get; set; }
         public DateTime CreatedAt { get; set; }
         public DateTime CreationDate { get; set; }
+        public string Department { get; set; } = null!;
 
-        public string? ToUpdateRequest()
+        public DepartmentUpdateRequest ToUpdateRequest()
         {
-            throw new NotImplementedException();
+            return new DepartmentUpdateRequest
+            {
+                Id = this.Id,
+                Name = this.Name,
+                Description = this.Description,
+                Code = this.Code,
+                CreatedAt = this.CreatedAt,
+                CreationDate =DateTime.Now,
+            };
         }
+
     }
 }

@@ -18,6 +18,9 @@ namespace DEM_DAR.Context.Configurations
             builder.Property(e => e.Name).IsRequired()
                 .HasColumnType("varChar")
                 .HasMaxLength(20);
+            //builder.Property(e => e.Image).IsRequired()
+            //  .HasColumnType("varChar")
+            //  .HasMaxLength(256);
 
             builder.Property(e => e.Adress).IsRequired()
              .HasColumnType("varChar")
@@ -37,13 +40,18 @@ namespace DEM_DAR.Context.Configurations
 
 
             builder.Property(e => e.Gender)
-                .HasConversion(x => x.ToString()
-                ,s => Enum.Parse<Gender>(s));
+        .IsRequired()
+        .HasConversion(
+            x => x.ToString(),
+            s => Enum.Parse<Gender>(s)
+        );
 
-
-       builder.Property(e => e.employeeType)
-              .HasConversion(x => x.ToString()
-              , s => Enum.Parse<EmployeeType>(s));
+            builder.Property(e => e.employeeType)
+                   .IsRequired()
+                   .HasConversion(
+                       x => x.ToString(),
+                       s => Enum.Parse<EmployeeType>(s)
+                   );
 
 
         }

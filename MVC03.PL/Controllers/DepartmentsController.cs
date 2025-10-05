@@ -20,10 +20,6 @@ public class DepartmentsController(IDepartmentService departmentService,
 
     #region Create
     [HttpGet]
-    public IActionResult Create()
-    {
-        return View();
-    }
     [HttpPost]
     public IActionResult Create(DepartmentRequest request)
     {
@@ -33,7 +29,6 @@ public class DepartmentsController(IDepartmentService departmentService,
         try
         {
             var result = departmentService.Add(request);
-            // throw new Exception("Test Error");
             if (result > 0)
                 return RedirectToAction(nameof(Index));
 
@@ -41,17 +36,17 @@ public class DepartmentsController(IDepartmentService departmentService,
         }
         catch (Exception ex)
         {
-            //Dev=> Display 
-            // prod => log
+            var inner = ex.InnerException?.Message ?? ex.Message;
+
             if (env.IsDevelopment())
-                ModelState.AddModelError(string.Empty, ex.Message);
+                ModelState.AddModelError(string.Empty, inner);
             else
-                logger.LogError(ex.Message);
+                logger.LogError(inner);
         }
 
         return View(request);
-
     }
+
     #endregion
 
     #region Details

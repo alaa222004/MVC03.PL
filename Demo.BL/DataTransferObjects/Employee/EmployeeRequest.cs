@@ -1,4 +1,5 @@
 ﻿using DEM_DAR.Models.Enums;
+using Microsoft.AspNetCore.Http;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -18,8 +19,8 @@ namespace Demo.BL.DataTransferObjects.Employee
         [Range(22, 30)]
         public int? Age { get; set; }
 
-        [RegularExpression(@"^[1-9]{1,3}-[A-Z][a-z]{5,10}-[a-zA-Z]{5,10}-[a-zA-Z]{5,10}$",
-            ErrorMessage = "Address must be like 123-Street-City-Country")]
+        //[RegularExpression(@"^[1-9]{1,3}-[A-Z][a-z]{5,10}-[a-zA-Z]{5,10}-[a-zA-Z]{5,10}$",
+        //    ErrorMessage = "Address must be like 123-Street-City-Country")]
         public string? Address { get; set; }
 
         [DataType(DataType.Currency)]
@@ -44,5 +45,6 @@ namespace Demo.BL.DataTransferObjects.Employee
         public EmployeeType EmployeeType { get; set; }
 
         public int? DepartmentId { get; set; }
+        public IFormFile? Image { get; set; }
     }
 }

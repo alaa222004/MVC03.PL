@@ -31,44 +31,44 @@ public class EmployeesController(IEmployeeService Service,
     [HttpGet]
     public IActionResult Create()
     {
-        var departments = departmentService.GetAll();
-        var selectList = new SelectList(departments, "Id", "Name");
-        ViewBag.Departments = selectList;
+        ViewBag.Departments = new SelectList(departmentService.GetAll(), "Id", "Name");
         return View();
     }
+
     [HttpPost]
     public IActionResult Create(EmployeeRequest request)
     {
         if (!ModelState.IsValid)
+        {
+            // لازم تعيد تحميل الـ SelectList لو رجعت للـ View
+            ViewBag.Departments = new SelectList(departmentService.GetAll(), "Id", "Name", request.DepartmentId);
             return View(request);
+        }
 
         try
         {
             var result = Service.Add(request);
-            // throw new Exception("Test Error");
-            if (result > 0)
 
+            if (result > 0)
                 TempData["Message"] = $"Employee {request.Name} Added Successfully";
             else
                 TempData["Message"] = $"Can't Add Employee {request.Name}";
+
             return RedirectToAction(nameof(Index));
-
-
-            //ModelState.AddModelError(string.Empty, "Can't Add Employee now");
         }
         catch (Exception ex)
         {
-            //Dev=> Display 
-            // prod => log
             if (env.IsDevelopment())
                 ModelState.AddModelError(string.Empty, ex.Message);
             else
                 logger.LogError(ex.Message);
+
+            // لو في Exception برضه لازم تعيد تحميل الـ Departments
+            ViewBag.Departments = new SelectList(departmentService.GetAll(), "Id", "Name", request.DepartmentId);
+            return View(request);
         }
-
-        return View(request);
-
     }
+
     #endregion
 
     #region Details
