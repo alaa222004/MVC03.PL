@@ -1,12 +1,7 @@
-﻿using DEM_DAR.Models;
-
+﻿
 using DEM_DAR.Models.Enums;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 using Employee = DEM_DAR.Models.Employee;
 
 namespace DEM_DAR.Context.Configurations
